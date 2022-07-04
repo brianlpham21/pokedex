@@ -1,7 +1,9 @@
 import { Routes, Route } from "react-router-dom";
+
 import Header from './components/Header';
 import Home from './containers/Home';
 import CapturedPage from './containers/CapturedPage';
+
 import './App.css';
 
 function App() {
