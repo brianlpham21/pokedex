@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setSelected, setDetails } from '../features/pokemon/pokemonSlice';
+import { setSelected, setDetails, setLoadingStatus } from '../features/pokemon/pokemonSlice';
 
 import { formatOrderNumber } from '../helpers/formatOrderNumber';
 import { capitalizeString } from '../helpers/capitalizeString';
@@ -9,6 +9,7 @@ import { capitalizeString } from '../helpers/capitalizeString';
 export default function Card({ pokemonUrl }) {
   const dispatch = useDispatch();
   const selected = useSelector((state) => state.pokemon.selected);
+  const loading = useSelector((state) => state.pokemon.loading);
 
   const [pokemonData, setPokemonData] = useState([]);
 
@@ -18,6 +19,7 @@ export default function Card({ pokemonUrl }) {
       .then((data) => {
         setPokemonData(data);
         dispatch(setDetails(data));
+        dispatch(setLoadingStatus(false));
       });  
   }, [pokemonUrl, dispatch])
 
@@ -27,7 +29,7 @@ export default function Card({ pokemonUrl }) {
     dispatch(setSelected(pokemonData.name === selected.name ? {} : pokemonData));
   };
 
-  if (!pokemonData.name) {
+  if (loading) {
     return <div>loading</div>
   }
 

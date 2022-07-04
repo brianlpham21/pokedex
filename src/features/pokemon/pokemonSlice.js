@@ -3,12 +3,16 @@ import { createSlice } from '@reduxjs/toolkit';
 export const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState: {
+    loading: false,
     list: [],
     page: 1,
     selected: {},
     captured: [],
   },
   reducers: {
+    setLoadingStatus: (state, action) => {
+      state.loading = action.payload;
+    },
     incrementPage: (state) => {
       state.page += 1;
     },
@@ -37,6 +41,6 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const { incrementPage, decrementPage, setPage, setList, setSelected, setDetails } = pokemonSlice.actions;
+export const { setLoadingStatus, incrementPage, decrementPage, setPage, setList, setSelected, setDetails } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
