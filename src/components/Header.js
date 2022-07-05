@@ -13,13 +13,13 @@ export default function Header() {
   }, [location])
   
   return (
-    <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingRight: '52px' }}>
-      <Link to="/"><img src={pokedexLogo} alt="pokemon_logo" style={{ height: '120px', margin: '48px 36px' }} /></Link>
+    <nav className="header">
+      <Link to="/"><img className="header-pokedex-logo" src={pokedexLogo} alt="pokemon_logo" /></Link>
       {pathname === '/'
         ? (
-          <Link to="/captured" style={{ display: 'flex', backgroundColor: '#EB5435', alignItems: 'center', borderRadius: '100px', textDecoration: 'none' }}>
-            <img src={pokeball} alt="pokeball" style={{ height: '72px' }} />
-            <span style={{ color: 'white', fontSize: '36px', paddingRight: '16px' }}>Captured Pokemons</span>
+          <Link to="/captured" className="captured-pm-button">
+            <img className="header-pokeball-image" src={pokeball} alt="pokeball" />
+            <span className="captured-pm-button-text">Captured Pokemons</span>
           </Link>
         ) : <Link to="/" style={{ textDecoration: 'none', backgroundColor: 'lightGrey', fontSize: '30px', padding: '15px 50px', borderRadius: '50px', color: 'black' }}>Back</Link>
       }

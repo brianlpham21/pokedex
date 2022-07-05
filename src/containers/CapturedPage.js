@@ -19,7 +19,7 @@ export default function CapturedPage() {
           {
             captured.length ? captured.map((pokemon) => {
               return (
-                <tr>
+                <tr key={pokemon.id}>
                   <td>{pokemon.name}</td>
                   <td>{pokemon.nickname}</td>
                   <td>{pokemon.capturedDate}</td>

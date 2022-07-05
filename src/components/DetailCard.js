@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import CaptureModal from './CaptureModal';
-import { formatOrderNumber } from '../helpers/formatOrderNumber';
-import { capitalizeString } from '../helpers/capitalizeString';
+import { capitalizeString, formatOrderNumber } from '../helpers';
 
 export default function DetailCard() {
   const selected = useSelector((state) => state.pokemon.selected);

@@ -15,7 +15,7 @@ export default function Home() {
   });
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div className="home-page">
       <div>
         <Pagination />
         <CardListContainer />

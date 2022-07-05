@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { setSelected} from '../features/pokemon/pokemonSlice';
 
-import { formatOrderNumber } from '../helpers/formatOrderNumber';
-import { capitalizeString } from '../helpers/capitalizeString';
+import { capitalizeString, formatOrderNumber } from '../helpers';
+import { bgColors } from '../constants';
 
 export default function Card({ pokemon }) {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export default function Card({ pokemon }) {
   return (
     <button
       onClick={handleClick}
-      style={{ padding: '0', width: 'calc((100%/4) - 27px)', borderRadius: '10px', height: 'fit-content', border: 'none', boxShadow: `5px 5px 10px ${pokemon.name === selected.name ? 'purple' : 'lightGrey'}` }}
+      style={{ backgroundColor: `${result && result[0] && bgColors[result[0]]}`, padding: '0', width: 'calc((100%/4) - 27px)', borderRadius: '10px', height: 'fit-content', border: 'none', boxShadow: `5px 5px 10px ${pokemon.name === selected.name ? 'purple' : 'lightGrey'}` }}
     >
       <img src={pokemon?.details?.sprites?.other['official-artwork'].front_default} alt={`${pokemon.name}`} style={{ height: '100px' }} />
       <div style={{ backgroundColor: 'white', borderRadius: '0 0 10px 10px' }}>

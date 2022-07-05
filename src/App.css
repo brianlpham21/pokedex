@@ -1,0 +1,85 @@
+:root {
+  --pokemon-red: #EB5435;
+  --background: #fafafa;
+  --white: #ffffff;
+  --light-grey: #e0e0e0;
+  --medium-grey: #828282;
+  --dark-grey: #333333;
+}
+
+/* HEADER */
+
+nav.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 52px;
+}
+
+.header-pokedex-logo {
+  height: 120px;
+  margin: 48px 36px;
+}
+
+.captured-pm-button {
+  align-items: center;
+  background-color: var(--pokemon-red);
+  border-radius: 100px;
+  display: flex;
+  text-decoration: none;
+}
+
+.header-pokedex-logo:hover,
+.captured-pm-button:hover {
+  cursor: pointer;
+  opacity: .9;
+}
+
+.header-pokeball-image {
+  height: 72px;
+}
+
+.captured-pm-button-text {
+  color: var(--white);
+  font-size: 36px;
+  padding-right: 16px;
+}
+
+/* HOME PAGE */
+
+.home-page {
+  display: flex;
+}
+
+/* Pagination */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.next-button:hover,
+.previous-button:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.next-button,
+.previous-button {
+  background-color: var(--pokemon-red);
+  border: none;
+  border-radius: 15px;
+  color: var(--white);
+  padding: 10px 20px;
+}
+
+.previous-button {
+  margin-right: 10px;
+
+}
+
+/* Pokemon List Card */
+
+.card {
+
+}

@@ -15,9 +15,23 @@ export default function Pagination() {
   }
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      {previousUrl && <button id='previous' onClick={handleClick}>Previous</button>}
-      {nextUrl && <button id='next' onClick={handleClick}>Next</button>}
+    <div className="pagination">
+      {
+        previousUrl && (
+          <button
+            className="previous-button"
+            id='previous'
+            onClick={handleClick}
+          >
+            Previous
+          </button>
+        )
+      }
+      {
+        nextUrl && (
+          <button className="next-button" id='next' onClick={handleClick}>Next</button>
+        )
+      }
     </div>
   )
 }

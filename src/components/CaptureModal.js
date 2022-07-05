@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 
 import { addCaptured } from '../features/pokemon/pokemonSlice';
 
-import { capitalizeString } from '../helpers/capitalizeString';
+import { capitalizeString } from '../helpers';
 
 const customStyles = {
   content: {
