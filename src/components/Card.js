@@ -9,7 +9,6 @@ import { capitalizeString } from '../helpers/capitalizeString';
 export default function Card({ pokemonUrl }) {
   const dispatch = useDispatch();
   const selected = useSelector((state) => state.pokemon.selected);
-  const loading = useSelector((state) => state.pokemon.loading);
 
   const [pokemonData, setPokemonData] = useState([]);
 
@@ -28,10 +27,6 @@ export default function Card({ pokemonUrl }) {
   const handleClick = () => {
     dispatch(setSelected(pokemonData.name === selected.name ? {} : pokemonData));
   };
-
-  if (loading) {
-    return <div>loading</div>
-  }
 
   return (
     <button

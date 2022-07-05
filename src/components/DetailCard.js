@@ -6,11 +6,13 @@ import { formatOrderNumber } from '../helpers/formatOrderNumber';
 import { capitalizeString } from '../helpers/capitalizeString';
 
 export default function DetailCard() {
-  const selected = useSelector((state) => state.pokemon.selected)
+  const selected = useSelector((state) => state.pokemon.selected);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   let result = selected?.types?.map(a => a.type.name);
   let result1 = selected?.stats?.map(a => [a.stat.name, a.base_stat]);
+
+  if (!selected.name) return null;
 
   return (
     <div style={{ border: '1px solid black', margin: '22px', borderRadius: '10px' }}>
