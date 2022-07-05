@@ -1,14 +1,23 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function Pagination({ onClick, paginationData }) {
-  const page = useSelector((state) => state.pokemon.page);
+import { fetchPokemonList } from '../features/pokemon/thunks/fetchPokemonList';
+
+export default function Pagination() {
+  const dispatch = useDispatch();
+
+  const nextUrl = useSelector((state) => state.pokemon.next);
+  const previousUrl = useSelector((state) => state.pokemon.previous);
+
+  const handleClick = (e) => {
+    const url = e.target.id === 'next' ? nextUrl : previousUrl;
+    dispatch(fetchPokemonList(url));
+  }
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      {paginationData.previous && <button id='previous' onClick={onClick}>Previous</button>}
-      {page} {page + 1} {page + 2}
-      {paginationData.next && <button id='next' onClick={onClick}>Next</button>}
+      {previousUrl && <button id='previous' onClick={handleClick}>Previous</button>}
+      {nextUrl && <button id='next' onClick={handleClick}>Next</button>}
     </div>
   )
 }
