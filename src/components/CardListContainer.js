@@ -9,7 +9,7 @@ export default function CardListContainer() {
   const results = useSelector((state) => getPokemonList(state));
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '36px', margin: '36px' }}>
+    <div className="cards-container">
       {results && results.map(pokemon => <Card pokemon={pokemon} key={pokemon.url} />)}
     </div>
   )

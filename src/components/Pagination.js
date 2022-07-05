@@ -8,6 +8,7 @@ export default function Pagination() {
 
   const nextUrl = useSelector((state) => state.pokemon.next);
   const previousUrl = useSelector((state) => state.pokemon.previous);
+  const loading = useSelector((state) => state.pokemon.loading);
 
   const handleClick = (e) => {
     const url = e.target.id === 'next' ? nextUrl : previousUrl;
@@ -19,9 +20,10 @@ export default function Pagination() {
       {
         previousUrl && (
           <button
-            className="previous-button"
+            className={`previous-button ${loading && 'disabled'}`}
             id='previous'
             onClick={handleClick}
+            disabled={loading}
           >
             Previous
           </button>
@@ -29,7 +31,14 @@ export default function Pagination() {
       }
       {
         nextUrl && (
-          <button className="next-button" id='next' onClick={handleClick}>Next</button>
+          <button
+            className={`next-button ${loading && 'disabled'}`}
+            id='next'
+            onClick={handleClick}
+            disabled={loading}
+          >
+            Next
+          </button>
         )
       }
     </div>

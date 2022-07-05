@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import CaptureModal from './CaptureModal';
 import { capitalizeString, formatOrderNumber } from '../helpers';
 
+import { bgColors } from '../constants';
+
 export default function DetailCard() {
   const selected = useSelector((state) => state.pokemon.selected);
   const captured = useSelector((state) => state.pokemon.captured);
@@ -17,24 +19,31 @@ export default function DetailCard() {
   if (!selected.name) return null;
 
   return (
-    <div style={{ border: '1px solid black', margin: '22px', borderRadius: '10px' }}>
-      <img src={selected?.details?.sprites?.other['official-artwork'].front_default} alt={`${selected.name}`} style={{ height: '100px' }} />
-      <div>{formatOrderNumber(selected?.details.order)} {capitalizeString(selected.name)}</div>
-
-      <div>
-        <div>{selected?.details.weight / 10}</div>
-        <div>{selected?.details.height / 10}</div>
-        <div>{capitalizeString(result?.join(' · '), true)}</div>
+    <div className="detail-card">
+      <div className="main" style={{ backgroundColor: `${result && result[0] && bgColors[result[0]]}` }}>
+        <img src={selected?.details?.sprites?.other['official-artwork'].front_default} alt={`${selected.name}`} />
+        <div>{formatOrderNumber(selected?.details.order)} {capitalizeString(selected.name)}</div>
       </div>
 
-      <div>
-        <div>{result1.map((s) => <div style={{ whiteSpace: 'nowrap' }}>{s[0]} {s[1]}</div>)}</div>
+      <div className="about">
+        <h1 className="title">About</h1>
+        <div>Type(s): {capitalizeString(result?.join(' · '), true)}</div>
+        <div>Weight: {selected?.details.weight / 10} kg</div>
+        <div>Height: {selected?.details.height / 10} m</div>
+      </div>
+
+      <div className="base-stats">
+        <h1 className="title">Base Stats</h1>
+        {
+          result1.map((s) => <div>{capitalizeString(s[0])} {s[1]}</div>)
+        }
       </div>
 
       {!isCaptured
-        ? <button onClick={() => setModalIsOpen(true)}>Capture</button>
+        ? <div className="button-container"><button className="capture-button" onClick={() => setModalIsOpen(true)}>Capture</button></div>
         : (
-          <div>
+          <div className="captured-stats">
+            <h1 className="title">Capture Information</h1>
             <div>Nickname: {isCaptured?.nickname}</div>
             <div>Captured Date: {isCaptured?.capturedDate}</div>
             <div>Captured Level: {isCaptured?.capturedLevel}</div>

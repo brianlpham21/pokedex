@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setSelected} from '../features/pokemon/pokemonSlice';
@@ -8,24 +8,44 @@ import { bgColors } from '../constants';
 
 export default function Card({ pokemon }) {
   const dispatch = useDispatch();
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   const selected = useSelector((state) => state.pokemon.selected);
+  const loading = useSelector((state) => state.pokemon.loading);
 
   let result = pokemon?.details?.types?.map(a => a.type.name);
+  const isSelected = pokemon.name === selected.name;
 
-  const handleClick = () => {
-    dispatch(setSelected(pokemon.name === selected.name ? {} : pokemon));
+  const handleSelect = () => {
+    dispatch(setSelected(isSelected ? {} : pokemon));
   };
 
   return (
     <button
-      onClick={handleClick}
-      style={{ backgroundColor: `${result && result[0] && bgColors[result[0]]}`, padding: '0', width: 'calc((100%/4) - 27px)', borderRadius: '10px', height: 'fit-content', border: 'none', boxShadow: `5px 5px 10px ${pokemon.name === selected.name ? 'purple' : 'lightGrey'}` }}
+      className={`card ${isSelected && 'selected'}`}
+      onClick={handleSelect}
+      style={{ backgroundColor: `${result && result[0] && bgColors[result[0]]}` }}
     >
-      <img src={pokemon?.details?.sprites?.other['official-artwork'].front_default} alt={`${pokemon.name}`} style={{ height: '100px' }} />
-      <div style={{ backgroundColor: 'white', borderRadius: '0 0 10px 10px' }}>
-        <div>{formatOrderNumber(pokemon?.details?.order)} {capitalizeString(pokemon.name)}</div>
-        <div>{capitalizeString(result?.join(' · '), true)}</div>
-      </div>
+      <img
+        className={`card-image ${!imageLoaded && 'hidden'}`}
+        src={pokemon?.details?.sprites?.other['official-artwork'].front_default}
+        alt={`${pokemon.name}`}
+        onLoad={() => setImageLoaded(true)}
+      />
+      {
+        !loading
+          ? (
+            <div className="card-text">
+              <div className="card-title">
+                {formatOrderNumber(pokemon?.details?.order)} {capitalizeString(pokemon.name)}
+              </div>
+              <div className="card-subtitle">
+                {capitalizeString(result?.join(' · '), true)}
+              </div>
+            </div>
+          ) : <div className="loader" />
+      }
     </button>
   )
 }
