@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 export default function CapturedPage() {
+  const captured = useSelector((state) => state.pokemon.captured);
+
   return (
     <div>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -13,18 +16,18 @@ export default function CapturedPage() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Emil</td>
-            <td>Tobias</td>
-            <td>Linus</td>
-            <td>Linus</td>
-          </tr>
-          <tr>
-            <td>16</td>
-            <td>14</td>
-            <td>10</td>
-            <td>10</td>
-          </tr>
+          {
+            captured.length ? captured.map((pokemon) => {
+              return (
+                <tr>
+                  <td>{pokemon.name}</td>
+                  <td>{pokemon.nickname}</td>
+                  <td>{pokemon.capturedDate}</td>
+                  <td>{pokemon.capturedLevel}</td>
+                </tr>
+              )
+            }) : <div>none</div>
+          }
         </tbody>
       </table>
     </div>

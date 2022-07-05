@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
+
+import { addCaptured } from '../features/pokemon/pokemonSlice';
+
 import { capitalizeString } from '../helpers/capitalizeString';
 
 const customStyles = {
@@ -14,6 +18,17 @@ const customStyles = {
 };
 
 export default function CaptureModal({ modalIsOpen, setModalIsOpen, detailPokemonData }) {
+  const dispatch = useDispatch();
+  const [values, setValues] = useState({ nickname: '', capturedDate: '', capturedLevel: '' });
+
+  const handleInput = ({ target: { id, value } }) => {
+    setValues({ ...values, [id]: value });
+  }
+
+  const handleCapture = () => {
+    dispatch(addCaptured({ ...detailPokemonData, ...values }))
+  }
+
   return (
     <Modal
         isOpen={modalIsOpen}
@@ -22,10 +37,10 @@ export default function CaptureModal({ modalIsOpen, setModalIsOpen, detailPokemo
         contentLabel="Example Modal"
       >
         <div>Capturing {capitalizeString(detailPokemonData.name)}</div>
-        <div><input type="text" /></div>
-        <div><input type="text" /></div>
-        <div><input type="text" /></div>
-        <div><button>Capture</button></div>
+        <div><input onChange={handleInput} value={values['nickname']} type="text" placeholder='Nickname' id="nickname" /></div>
+        <div><input onChange={handleInput} value={values['capturedDate']} type="text" placeholder="Captured Date" id="capturedDate" /></div>
+        <div><input onChange={handleInput} value={values['capturedLevel']} type="text" placeholder="Captured Level" id="capturedLevel" /></div>
+        <div><button onClick={handleCapture}>Capture</button></div>
       </Modal>
   )
 }
