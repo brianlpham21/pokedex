@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import { motion } from 'framer-motion';
@@ -48,14 +48,18 @@ export default function CaptureModal({ modalIsOpen, setModalIsOpen, detailPokemo
   const [values, setValues] = useState(initialState);
   const [isValid, setIsValid] = useState(false);
 
+  useEffect(() => {
+    setIsValid(values.capturedDate !== '' && values.capturedLevel !== '');
+  }, [values])
+  
   const closeModal = () => {
     setValues(initialState)
     setModalIsOpen(false);
+    setIsValid(false);
   }
 
   const handleInput = ({ target: { id, value } }) => {
     setValues({ ...values, [id]: value });
-    setIsValid(values.capturedDate !== '' && values.capturedLevel !== '');
   }
 
   const handleCapture = () => {
