@@ -30,7 +30,8 @@ nav.header {
 }
 
 .header-pokedex-logo:hover,
-.captured-pm-button:hover {
+.captured-pm-button:hover,
+.back-button:hover {
   cursor: pointer;
   opacity: .9;
 }
@@ -43,6 +44,15 @@ nav.header {
   color: var(--white);
   font-size: 36px;
   padding-right: 16px;
+}
+
+.back-button {
+  background-color: var(--light-grey);
+  border-radius: 50px;
+  color: black;
+  font-size: 30px;
+  padding: 15px 50px;
+  text-decoration: none;
 }
 
 /* HOME PAGE */

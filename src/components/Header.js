@@ -21,7 +21,7 @@ export default function Header() {
             <img className="header-pokeball-image" src={pokeball} alt="pokeball" />
             <span className="captured-pm-button-text">Captured Pokemons</span>
           </Link>
-        ) : <Link to="/" style={{ textDecoration: 'none', backgroundColor: 'lightGrey', fontSize: '30px', padding: '15px 50px', borderRadius: '50px', color: 'black' }}>Back</Link>
+        ) : <Link to="/" className="back-button">Back</Link>
       }
     </nav>
   )
