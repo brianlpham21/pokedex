@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { motion } from "framer-motion";
 
 import CaptureModal from './CaptureModal';
 import { capitalizeString, formatOrderNumber } from '../helpers';
@@ -10,14 +11,18 @@ export default function DetailCard() {
   const selected = useSelector((state) => state.pokemon.selected);
   const captured = useSelector((state) => state.pokemon.captured);
 
-  const isCaptured = captured.filter((pokemon) => pokemon.name === selected.name)[0];
+  const isCaptured = captured.find((pokemon) => pokemon.name === selected.name);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  let result1 = selected?.stats?.map(a => [a.stat.name, a.base_stat]);
 
   if (!selected.name) return null;
 
   return (
+    <motion.div
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ ease: "easeOut", duration: .75 }}
+    >
     <div className="detail-card">
       <div className="main" style={{ backgroundColor: `${bgColors[selected.mainType]}` }}>
         <img src={selected?.sprites?.other['official-artwork'].front_default} alt={`${selected.name}`} />
@@ -33,9 +38,7 @@ export default function DetailCard() {
 
       <div className="base-stats">
         <h1 className="title">Base Stats</h1>
-        {
-          result1.map((s) => <div>{capitalizeString(s[0])}: {s[1]}</div>)
-        }
+        {selected.stats.map((s) => <div>{s.join(': ')}</div>)}
       </div>
 
       {!isCaptured
@@ -50,5 +53,6 @@ export default function DetailCard() {
         )}
       <CaptureModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} detailPokemonData={selected} />
     </div>
+    </motion.div>
   )
 }

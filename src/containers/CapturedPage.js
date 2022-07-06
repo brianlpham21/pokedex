@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { removeCaptured } from '../features/pokemon/pokemonSlice';
 
@@ -20,19 +21,29 @@ export default function CapturedPage() {
     <div className="captured-container">
       <table className="captured-table">
         <thead className="captured-table-header">
-          <tr>
-            <th>Pokemon</th>
-            <th>Nickname</th>
-            <th>Captured At</th>
-            <th>Captured Level</th>
-            <th />
-          </tr>
+          {
+            captured.length ? (
+            <tr>
+              <th>Pokemon</th>
+              <th>Nickname</th>
+              <th>Captured At</th>
+              <th>Captured Level</th>
+              <th />
+            </tr>) : (
+              <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }}><td className="empty-captured" colSpan={5}>No Pokemon Captured Yet.</td></motion.tr>
+            )
+          }
         </thead>
         <tbody className="captured-table-body">
+        <AnimatePresence>
           {
-            captured.length ? captured.map((pokemon) => {
+            captured.length && captured.map((pokemon) => {
               return (
-                <tr key={pokemon.id}>
+                <motion.tr key={pokemon.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, x: -2000 }}
+                >
                   <td>
                     <img style={{ backgroundColor: `${bgColors[pokemon.mainType]}` }} src={pokemon.sprites?.other['official-artwork'].front_default} alt={`${pokemon.name}`} />
                     <span className="captured-main-info">
@@ -44,10 +55,11 @@ export default function CapturedPage() {
                   <td>{pokemon.capturedDate}</td>
                   <td>{pokemon.capturedLevel}</td>
                   <td><button className="release-button" onClick={() => handleRelease(pokemon.id)}>Release</button></td>
-                </tr>
+                </motion.tr>
               )
-            }) : <tr><td className="empty-captured" colSpan={4}>No Pokemon Captured Yet.</td></tr>
+            })
           }
+        </AnimatePresence>
         </tbody>
       </table>
     </div>

@@ -3,7 +3,7 @@ import { fetchPokemonList, fetchPokemonDetails } from "../thunks";
 
 export const effect = async ({ payload: { results } }, { dispatch }) => {
   if (results.length) {
-    results.map((pokemon) => dispatch(fetchPokemonDetails(pokemon.url)))
+    results.map((pokemon) => dispatch(fetchPokemonDetails(pokemon.url)));
   }
 };
 

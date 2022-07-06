@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 
 import { setSelected} from '../features/pokemon/pokemonSlice';
 
@@ -20,11 +21,16 @@ export default function Card({ pokemon }) {
     dispatch(setSelected(isSelected ? {} : pokemon));
   };
 
+  if (!pokemon) return null;
+
   return (
-    <button
+    <motion.button
       className={`card ${isSelected && 'selected'}`}
       onClick={handleSelect}
       style={{ backgroundColor: `${bgColors[pokemon?.mainType]}` }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: .75 }}
     >
       <img
         className={`card-image ${!imageLoaded && 'hidden'}`}
@@ -45,6 +51,6 @@ export default function Card({ pokemon }) {
             </div>
           ) : <div className="loader" />
       }
-    </button>
+    </motion.button>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
+import { motion } from 'framer-motion';
 
 import { addCaptured } from '../features/pokemon/pokemonSlice';
 
@@ -70,11 +71,17 @@ export default function CaptureModal({ modalIsOpen, setModalIsOpen, detailPokemo
       onRequestClose={closeModal}
       style={customStyles}
     >
-      <div className="modal-title">Capturing {capitalizeString(detailPokemonData.name)}</div>
-      <div className="modal-input-container">
-        {inputs.map((i) => <input key={i.id} className="modal-input" onChange={handleInput} value={values[i.id]} type="text" placeholder={i.text} id={i.id} required={i.required} />)}
-      </div>
-      <div><button className={`modal-capture-button ${!isValid && 'invalid'}`} disabled={!isValid} onClick={handleCapture}>Capture</button></div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <div className="modal-title">Capturing {capitalizeString(detailPokemonData.name)}</div>
+        <div className="modal-input-container">
+          {inputs.map((i) => <input key={i.id} className="modal-input" onChange={handleInput} value={values[i.id]} type="text" placeholder={i.text} id={i.id} required={i.required} />)}
+        </div>
+        <div><button className={`modal-capture-button ${!isValid && 'invalid'}`} disabled={!isValid} onClick={handleCapture}>Capture</button></div>
+      </motion.div>
     </Modal>
   )
 }
