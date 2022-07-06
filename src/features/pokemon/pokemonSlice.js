@@ -19,6 +19,9 @@ export const pokemonSlice = createSlice({
     },
     addCaptured: (state, action) => {
       state.captured.push(action.payload);
+    },
+    removeCaptured: (state, action) => {
+      state.captured = state.captured.filter((pokemon) => pokemon.id !== action.payload);
     }
   },
   extraReducers: (builder) => {
@@ -27,11 +30,14 @@ export const pokemonSlice = createSlice({
     });
     builder.addCase(fetchPokemonList.fulfilled, (state, action) => ({ ...state, ...action.payload }));
     builder.addCase(fetchPokemonDetails.fulfilled, (state, action) => {
+      const types = action.payload.types.map(a => a.type.name);
+      const details = { ...action.payload, types, mainType: types[0] };
+
       return {
         ...state,
         results: state.results.map(pokemon => 
           pokemon.name === action.payload.name
-            ? { ...pokemon, details: action.payload }
+            ? { ...pokemon, ...details }
             : pokemon
           ),
         loading: false,
@@ -40,6 +46,6 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const { setLoadingStatus, setSelected, addCaptured } = pokemonSlice.actions;
+export const { setLoadingStatus, setSelected, addCaptured, removeCaptured } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;

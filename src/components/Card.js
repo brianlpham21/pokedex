@@ -14,7 +14,6 @@ export default function Card({ pokemon }) {
   const selected = useSelector((state) => state.pokemon.selected);
   const loading = useSelector((state) => state.pokemon.loading);
 
-  let result = pokemon?.details?.types?.map(a => a.type.name);
   const isSelected = pokemon.name === selected.name;
 
   const handleSelect = () => {
@@ -25,11 +24,11 @@ export default function Card({ pokemon }) {
     <button
       className={`card ${isSelected && 'selected'}`}
       onClick={handleSelect}
-      style={{ backgroundColor: `${result && result[0] && bgColors[result[0]]}` }}
+      style={{ backgroundColor: `${bgColors[pokemon?.mainType]}` }}
     >
       <img
         className={`card-image ${!imageLoaded && 'hidden'}`}
-        src={pokemon?.details?.sprites?.other['official-artwork'].front_default}
+        src={pokemon?.sprites?.other['official-artwork'].front_default}
         alt={`${pokemon.name}`}
         onLoad={() => setImageLoaded(true)}
       />
@@ -38,10 +37,10 @@ export default function Card({ pokemon }) {
           ? (
             <div className="card-text">
               <div className="card-title">
-                {formatOrderNumber(pokemon?.details?.order)} {capitalizeString(pokemon.name)}
+                {formatOrderNumber(pokemon?.order)} {capitalizeString(pokemon.name)}
               </div>
               <div className="card-subtitle">
-                {capitalizeString(result?.join(' · '), true)}
+                {capitalizeString(pokemon?.types?.join(' · '), true)}
               </div>
             </div>
           ) : <div className="loader" />

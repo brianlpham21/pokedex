@@ -7,6 +7,9 @@ import { addCaptured } from '../features/pokemon/pokemonSlice';
 import { capitalizeString } from '../helpers';
 
 const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+  },
   content: {
     top: '50%',
     left: '50%',
@@ -14,33 +17,64 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    width: '30%',
+    textAlign: 'center',
+    borderRadius: '16px'
   },
 };
 
+const inputs = [
+  {
+    id: 'nickname',
+    text: 'Nickname',
+    required: false,
+  },
+  {
+    id: 'capturedDate',
+    text: 'Captured Date',
+    required: true,
+  },
+  {
+    id: 'capturedLevel',
+    text: 'Captured Level',
+    required: true,
+  },
+];
+
 export default function CaptureModal({ modalIsOpen, setModalIsOpen, detailPokemonData }) {
   const dispatch = useDispatch();
-  const [values, setValues] = useState({ nickname: '', capturedDate: '', capturedLevel: '' });
+  const initialState = { nickname: '', capturedDate: '', capturedLevel: '' };
+  const [values, setValues] = useState(initialState);
+  const [isValid, setIsValid] = useState(false);
+
+  const closeModal = () => {
+    setValues(initialState)
+    setModalIsOpen(false);
+  }
 
   const handleInput = ({ target: { id, value } }) => {
     setValues({ ...values, [id]: value });
+    setIsValid(values.capturedDate !== '' && values.capturedLevel !== '');
   }
 
   const handleCapture = () => {
-    dispatch(addCaptured({ ...detailPokemonData, ...values }))
+    if (isValid) {
+      dispatch(addCaptured({ ...detailPokemonData, ...values }));
+      closeModal();
+    }
   }
 
   return (
     <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div>Capturing {capitalizeString(detailPokemonData.name)}</div>
-        <div><input onChange={handleInput} value={values['nickname']} type="text" placeholder='Nickname' id="nickname" /></div>
-        <div><input onChange={handleInput} value={values['capturedDate']} type="text" placeholder="Captured Date" id="capturedDate" /></div>
-        <div><input onChange={handleInput} value={values['capturedLevel']} type="text" placeholder="Captured Level" id="capturedLevel" /></div>
-        <div><button onClick={handleCapture}>Capture</button></div>
-      </Modal>
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      style={customStyles}
+    >
+      <div className="modal-title">Capturing {capitalizeString(detailPokemonData.name)}</div>
+      <div className="modal-input-container">
+        {inputs.map((i) => <input key={i.id} className="modal-input" onChange={handleInput} value={values[i.id]} type="text" placeholder={i.text} id={i.id} required={i.required} />)}
+      </div>
+      <div><button className={`modal-capture-button ${!isValid && 'invalid'}`} disabled={!isValid} onClick={handleCapture}>Capture</button></div>
+    </Modal>
   )
 }

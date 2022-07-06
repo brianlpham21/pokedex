@@ -168,8 +168,10 @@ nav.header {
   border: none;
   border-radius: 44px;
   box-shadow: 0px 0px 25px var(--light-grey);
+  height: fit-content;
   margin-right: 22px;
   min-width: 360px;
+  padding-bottom: 40px;
 }
 
 .detail-card > .main {
@@ -226,4 +228,134 @@ nav.header {
 .capture-button:hover {
   cursor: pointer;
   opacity: .9;
+}
+
+/* Capture Modal */
+
+.modal-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.modal-input-container > * {
+  margin: 5px 0;
+}
+
+.modal-input {
+  border: .5px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 10px;
+  width: 100%;
+}
+
+.modal-capture-button {
+  background-color: var(--pokemon-red);
+  border: none;
+  border-radius: 100px;
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 590;
+  margin-top: 20px;
+  padding: 12px 0;
+  width: 100%;
+}
+
+.modal-capture-button.invalid {
+  background-color: var(--light-grey);
+}
+
+.modal-capture-button:hover {
+  cursor: pointer;
+  opacity: .9;
+}
+
+/* CAPTURED PAGE */
+
+.captured-container {
+  padding: 0 36px;
+}
+
+/* Table Header */
+
+.captured-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.captured-table-header {
+  background-color: var(--light-grey);
+  font-size: 24px;
+  font-weight: 590;
+  text-transform: uppercase;
+}
+
+.captured-table-header th:first-child {
+  text-align: left;
+  padding-left: 16px;
+}
+
+.captured-table-header th {
+  padding: 16px 0;
+}
+
+/* Table Body */
+
+.captured-table-body td:not(:first-child) {
+  font-size: 28px;
+  font-weight: 510;
+  text-align: center;
+}
+
+.captured-table-body td:first-child:not(.empty-captured) {
+  display: flex;
+  align-items: center;
+}
+
+.captured-table-body img {
+  border-radius: 16px;
+  height: 100px;
+  padding: 8px;
+  width: 100px;
+}
+
+.captured-main-info {
+  padding-left: 20px;
+}
+
+.captured-name {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.captured-type {
+  font-size: 24px;
+  font-weight: 274;
+}
+
+.captured-table-body > * {
+  margin: 5px 0;
+}
+
+.release-button {
+  background-color: var(--pokemon-red);
+  border: none;
+  border-radius: 100px;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 590;
+  padding: 10px;
+}
+
+.release-button:hover {
+  cursor: pointer;
+  opacity: .9;
+}
+
+.empty-captured {
+  padding-top: 25px;
+  text-align: center;
 }

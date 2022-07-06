@@ -13,29 +13,28 @@ export default function DetailCard() {
   const isCaptured = captured.filter((pokemon) => pokemon.name === selected.name)[0];
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  let result = selected?.details?.types?.map(a => a.type.name);
-  let result1 = selected?.details?.stats?.map(a => [a.stat.name, a.base_stat]);
+  let result1 = selected?.stats?.map(a => [a.stat.name, a.base_stat]);
 
   if (!selected.name) return null;
 
   return (
     <div className="detail-card">
-      <div className="main" style={{ backgroundColor: `${result && result[0] && bgColors[result[0]]}` }}>
-        <img src={selected?.details?.sprites?.other['official-artwork'].front_default} alt={`${selected.name}`} />
-        <div>{formatOrderNumber(selected?.details.order)} {capitalizeString(selected.name)}</div>
+      <div className="main" style={{ backgroundColor: `${bgColors[selected.mainType]}` }}>
+        <img src={selected?.sprites?.other['official-artwork'].front_default} alt={`${selected.name}`} />
+        <div>{formatOrderNumber(selected?.order)} {capitalizeString(selected.name)}</div>
       </div>
 
       <div className="about">
         <h1 className="title">About</h1>
-        <div>Type(s): {capitalizeString(result?.join(' · '), true)}</div>
-        <div>Weight: {selected?.details.weight / 10} kg</div>
-        <div>Height: {selected?.details.height / 10} m</div>
+        <div>Type(s): {capitalizeString(selected.types?.join(' · '), true)}</div>
+        <div>Weight: {selected?.weight / 10} kg</div>
+        <div>Height: {selected?.height / 10} m</div>
       </div>
 
       <div className="base-stats">
         <h1 className="title">Base Stats</h1>
         {
-          result1.map((s) => <div>{capitalizeString(s[0])} {s[1]}</div>)
+          result1.map((s) => <div>{capitalizeString(s[0])}: {s[1]}</div>)
         }
       </div>
 
@@ -49,7 +48,7 @@ export default function DetailCard() {
             <div>Captured Level: {isCaptured?.capturedLevel}</div>
           </div>
         )}
-      <CaptureModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} detailPokemonData={selected?.details} />
+      <CaptureModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} detailPokemonData={selected} />
     </div>
   )
 }
