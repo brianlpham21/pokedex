@@ -42,7 +42,7 @@ export default function CapturedPage() {
                 <motion.tr key={pokemon.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, x: -2000 }}
+                  exit={{ opacity: 0 }}
                 >
                   <td>
                     <img style={{ backgroundColor: `${bgColors[pokemon.mainType]}` }} src={pokemon.sprites?.other['official-artwork'].front_default} alt={`${pokemon.name}`} />

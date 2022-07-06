@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchPokemonList } from '../features/pokemon/thunks/fetchPokemonList';
 
+import { calculatePage, validatePageNumber } from '../helpers';
+
+import { apiCallSettings } from '../constants';
+
 export default function Pagination() {
   const dispatch = useDispatch();
 
@@ -15,32 +19,35 @@ export default function Pagination() {
     dispatch(fetchPokemonList(url));
   }
 
+  const page = (calculatePage(apiCallSettings.limit, nextUrl))
+
   return (
     <div className="pagination">
-      {
-        previousUrl && (
-          <button
-            className={`previous-button ${loading && 'disabled'}`}
-            id='previous'
-            onClick={handleClick}
-            disabled={loading}
-          >
-            Previous
-          </button>
-        )
-      }
-      {
-        nextUrl && (
-          <button
-            className={`next-button ${loading && 'disabled'}`}
-            id='next'
-            onClick={handleClick}
-            disabled={loading}
-          >
-            Next
-          </button>
-        )
-      }
+      <button
+        className={`previous-button ${(loading || !previousUrl) && 'disabled'}`}
+        id='previous'
+        onClick={handleClick}
+        disabled={(loading || !previousUrl)}
+      >
+        Previous
+      </button>
+
+      <div className="page-selection" style={{ display: 'flex', alignItems: 'center', marginRight: '10px' }}>
+        <div>{validatePageNumber(page - 2)}</div>
+        <div>{validatePageNumber(page - 1)}</div>
+        <div className="active">{page}</div>
+        <div>{page + 1}</div>
+        <div>{page + 2}</div>
+      </div>
+
+      <button
+        className={`next-button ${(loading || !nextUrl) && 'disabled'}`}
+        id='next'
+        onClick={handleClick}
+        disabled={loading || !nextUrl}
+      >
+        Next
+      </button>
     </div>
   )
 }

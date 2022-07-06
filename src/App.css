@@ -82,7 +82,18 @@ nav.header {
 
 .previous-button {
   margin-right: 10px;
+}
 
+.page-selection {
+  font-size: 16px;
+}
+
+.page-selection .active {
+  font-weight: 800;
+}
+
+.page-selection > * {
+  margin: 0 10px;
 }
 
 /* Pokemon List Cards */

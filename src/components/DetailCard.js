@@ -46,7 +46,7 @@ export default function DetailCard() {
         : (
           <div className="captured-stats">
             <h1 className="title">Capture Information</h1>
-            <div>Nickname: {isCaptured?.nickname}</div>
+            <div>Nickname: {isCaptured?.nickname === '' ? '-' : isCaptured?.nickname}</div>
             <div>Captured Date: {isCaptured?.capturedDate}</div>
             <div>Captured Level: {isCaptured?.capturedLevel}</div>
           </div>

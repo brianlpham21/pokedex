@@ -18,3 +18,7 @@ export const bgColors = {
   'electric': '#ffcc33b3',
   'dragon': '#6666bab3',
 }
+
+export const apiCallSettings = {
+  limit: 20,
+}
