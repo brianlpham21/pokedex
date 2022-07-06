@@ -38,7 +38,7 @@ export default function DetailCard() {
 
       <div className="base-stats">
         <h1 className="title">Base Stats</h1>
-        {selected.stats.map((s) => <div>{s.join(': ')}</div>)}
+        {selected.stats.map((s, i) => <div key={i}>{s.join(': ')}</div>)}
       </div>
 
       {!isCaptured

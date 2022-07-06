@@ -25,7 +25,7 @@ export default function Card({ pokemon }) {
 
   return (
     <motion.button
-      className={`card ${isSelected && 'selected'}`}
+      className={`card ${isSelected && 'selected'} ${selected.name && 'minimize'}`}
       onClick={handleSelect}
       style={{ backgroundColor: `${bgColors[pokemon?.mainType]}` }}
       initial={{ opacity: 0 }}

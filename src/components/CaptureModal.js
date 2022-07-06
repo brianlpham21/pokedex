@@ -42,6 +42,8 @@ const inputs = [
   },
 ];
 
+Modal.setAppElement('#root');
+
 export default function CaptureModal({ modalIsOpen, setModalIsOpen, detailPokemonData }) {
   const dispatch = useDispatch();
   const initialState = { nickname: '', capturedDate: '', capturedLevel: '' };
