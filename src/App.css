@@ -186,7 +186,14 @@ nav.header {
 .card-text {
   background-color: var(--white);
   border-radius: 0 0 10px 10px;
+  display: flex;
+  justify-content: space-between;
   padding: 8px 8px 8px 16px;
+}
+
+.card-captured-icon {
+  height: 25px;
+  width: 25px;
 }
 
 .card-title {
@@ -252,6 +259,14 @@ nav.header {
   top: 40px;
 }
 
+.captured-icon {
+  height: 25px;
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  width: 25px;
+}
+
 .detail-card > .main {
   color: var(--white);
   border-radius: 44px 44px 0 0;
@@ -261,7 +276,7 @@ nav.header {
   text-align: center;
 }
 
-.detail-card > .main > img {
+.detail-card > .main > .pokemon-image {
   height: 140px;
   width: 140px;
 }
@@ -346,6 +361,14 @@ nav.header {
   font-weight: 400;
   padding: 10px;
   width: 100%;
+}
+
+.modal-input.invalid {
+  border: 1px solid var(--pokemon-red);
+}
+
+.modal-input.invalid:focus {
+  outline: 1px solid var(--pokemon-red);
 }
 
 .modal-capture-button {
@@ -467,6 +490,10 @@ nav.header {
 .empty-captured {
   padding: 16px;
   text-align: center;
+}
+
+.none-text {
+  color: var(--light-grey)
 }
 
 @media only screen and (max-width: 1023px) {

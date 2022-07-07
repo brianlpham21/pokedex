@@ -14,14 +14,15 @@ export default function Header() {
   
   return (
     <nav className="header">
-      <Link to="/"><img className="header-pokedex-logo" src={pokedexLogo} alt="pokemon_logo" /></Link>
-      {pathname === '/' || pathname === '/pokedex/'
-        ? (
+      <Link to="/"><img className="header-pokedex-logo" src={pokedexLogo} alt="pokedex_logo" /></Link>
+      {pathname === '/captured'
+        ? <Link to="/" className="back-button">Back</Link>
+        : (
           <Link to="/captured" className="captured-pm-button">
             <img className="header-pokeball-image" src={pokeball} alt="pokeball" />
             <span className="captured-pm-button-text">Captured Pokemons</span>
           </Link>
-        ) : <Link to="/" className="back-button">Back</Link>
+        )
       }
     </nav>
   )

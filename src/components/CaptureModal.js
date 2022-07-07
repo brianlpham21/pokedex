@@ -32,12 +32,12 @@ const inputs = [
   },
   {
     id: 'capturedDate',
-    text: 'Captured Date',
+    text: 'Captured Date (Required)',
     required: true,
   },
   {
     id: 'capturedLevel',
-    text: 'Captured Level',
+    text: 'Captured Level (Required)',
     required: true,
   },
 ];
@@ -84,7 +84,17 @@ export default function CaptureModal({ modalIsOpen, setModalIsOpen, detailPokemo
       >
         <div className="modal-title">Capturing {capitalizeString(detailPokemonData.name)}</div>
         <div className="modal-input-container">
-          {inputs.map((i) => <input key={i.id} className="modal-input" onChange={handleInput} value={values[i.id]} type="text" placeholder={i.text} id={i.id} required={i.required} />)}
+          {inputs.map((i) =>
+            <input
+              key={i.id}
+              className="modal-input"
+              onChange={handleInput}
+              value={values[i.id]}
+              type="text"
+              placeholder={i.text}
+              id={i.id}
+              required={i.required} />
+          )}
         </div>
         <div><button className={`modal-capture-button ${!isValid && 'invalid'}`} disabled={!isValid} onClick={handleCapture}>Capture</button></div>
       </motion.div>

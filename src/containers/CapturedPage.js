@@ -56,7 +56,7 @@ export default function CapturedPage() {
                       <div className="captured-type">{capitalizeString(pokemon.types.join(' · '), true)}</div>
                     </span>
                   </td>
-                  <td>{pokemon.nickname === '' ? 'None' : pokemon.nickname}</td>
+                  <td>{pokemon.nickname === '' ? <span className="none-text">None</span> : pokemon.nickname}</td>
                   <td>{pokemon.capturedDate}</td>
                   <td>{pokemon.capturedLevel}</td>
                   <td><button className="release-button" onClick={() => handleRelease(pokemon.id)}>Release</button></td>
