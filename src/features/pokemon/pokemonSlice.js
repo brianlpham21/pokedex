@@ -5,16 +5,14 @@ import { capitalizeString } from '../../helpers';
 export const getPokemonList = (state) => state.pokemon.results;
 
 export const pokemonSlice = createSlice({
+  loading: false,
   name: 'pokemon',
   initialState: {
-    loading: false,
     selected: {},
     captured: [],
+    results: [],
   },
   reducers: {
-    setLoadingStatus: (state, action) => {
-      state.loading = action.payload;
-    },
     setSelected: (state, action) => {
       state.selected = action.payload;
     },
@@ -26,10 +24,16 @@ export const pokemonSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchPokemonList.pending, (state) => {
-      state.loading = true;
+    builder.addCase(fetchPokemonList.pending, (state) => ({ ...state, loading: true }));
+    builder.addCase(fetchPokemonList.fulfilled, (state, action) => {
+      const combinedArrays = [...state.results, ...action.payload.results];
+      const unique = combinedArrays.reduce(
+        (acc, curr) =>
+          acc.find((v) => v.name === curr.name) ? acc : [...acc, curr],
+        []
+      );
+      return { ...state, ...action.payload, results: unique }
     });
-    builder.addCase(fetchPokemonList.fulfilled, (state, action) => ({ ...state, ...action.payload }));
     builder.addCase(fetchPokemonDetails.fulfilled, (state, action) => {
       const types = action.payload.types.map(a => a.type.name);
       const stats = action.payload.stats.map(a => [ capitalizeString(a.stat.name), a.base_stat ]);
@@ -48,6 +52,6 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const { setLoadingStatus, setSelected, addCaptured, removeCaptured } = pokemonSlice.actions;
+export const { setSelected, addCaptured, removeCaptured } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;

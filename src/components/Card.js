@@ -13,7 +13,6 @@ export default function Card({ pokemon }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const selected = useSelector((state) => state.pokemon.selected);
-  const loading = useSelector((state) => state.pokemon.loading);
 
   const isSelected = pokemon.name === selected.name;
 
@@ -38,19 +37,14 @@ export default function Card({ pokemon }) {
         alt={`${pokemon.name}`}
         onLoad={() => setImageLoaded(true)}
       />
-      {
-        !loading
-          ? (
-            <div className="card-text">
-              <div className="card-title">
-                {formatOrderNumber(pokemon?.order)} {capitalizeString(pokemon.name)}
-              </div>
-              <div className="card-subtitle">
-                {capitalizeString(pokemon?.types?.join(' · '), true)}
-              </div>
-            </div>
-          ) : <div className="loader" />
-      }
+      <div className="card-text">
+        <div className="card-title">
+          {formatOrderNumber(pokemon?.order)} {capitalizeString(pokemon.name)}
+        </div>
+        <div className="card-subtitle">
+          {capitalizeString(pokemon?.types?.join(' · '), true)}
+        </div>
+      </div>
     </motion.button>
   )
 }

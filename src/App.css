@@ -154,6 +154,10 @@ nav.header {
   opacity: .9;
 }
 
+.loader-container {
+  width: 100%;
+}
+
 .loader {
   border: 5px solid var(--light-grey); /* Light grey */
   border-top: 5px solid var(--pokemon-red); /* Blue */
@@ -244,6 +248,8 @@ nav.header {
   margin-right: 22px;
   min-width: 360px;
   padding-bottom: 40px;
+  position: sticky;
+  top: 40px;
 }
 
 .detail-card > .main {
