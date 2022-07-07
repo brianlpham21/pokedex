@@ -14,7 +14,6 @@ function App() {
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = useState(false);
   const next = useSelector((state) => state.pokemon.next);
-  const loading = useSelector((state) => state.pokemon.loading);
 
   useEffect(() => {
     dispatch(fetchPokemonList());
@@ -41,6 +40,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/pokedex" element={<Home />} />
         <Route path="/captured" element={<CapturedPage />} />
       </Routes>
     </div>

@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <nav className="header">
       <Link to="/"><img className="header-pokedex-logo" src={pokedexLogo} alt="pokemon_logo" /></Link>
-      {pathname === '/'
+      {pathname === '/' || pathname === '/pokedex'
         ? (
           <Link to="/captured" className="captured-pm-button">
             <img className="header-pokeball-image" src={pokeball} alt="pokeball" />

@@ -37,7 +37,7 @@ export default function CapturedPage() {
         <tbody className="captured-table-body">
         <AnimatePresence>
           {
-            captured.length && captured.map((pokemon) => {
+            captured.length && captured.map((pokemon, index) => {
               return (
                 <motion.tr key={pokemon.id}
                   initial={{ opacity: 0 }}
@@ -45,7 +45,12 @@ export default function CapturedPage() {
                   exit={{ opacity: 0 }}
                 >
                   <td>
-                    <img style={{ backgroundColor: `${bgColors[pokemon.mainType]}` }} src={pokemon.sprites?.other['official-artwork'].front_default} alt={`${pokemon.name}`} />
+                    <img 
+                      className={`pokemon${index}`}
+                      style={{ backgroundColor: `${bgColors[pokemon.mainType]}` }}
+                      src={pokemon.sprites?.other['official-artwork'].front_default}
+                      alt={`${pokemon.name}`}
+                    />
                     <span className="captured-main-info">
                       <div className="captured-name">{formatOrderNumber(pokemon.order)} {capitalizeString(pokemon.name)}</div>
                       <div className="captured-type">{capitalizeString(pokemon.types.join(' · '), true)}</div>

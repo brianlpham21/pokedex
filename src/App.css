@@ -426,8 +426,13 @@ nav.header {
 .captured-table-body img {
   border-radius: 16px;
   height: 100px;
+  margin-bottom: 10px;
   padding: 8px;
   width: 100px;
+}
+
+.captured-table-body img.pokemon0 {
+  margin-top: 10px;
 }
 
 .captured-main-info {
