@@ -22,3 +22,12 @@ You may also see any lint errors in the console.
 
 Home Page
 ![alt text](/images/home.png "Home Page") <br />
+
+Detail Card
+![alt text](/images/capture.png "Detail Card") <br />
+
+Capture Modal
+![alt text](/images/capture_modal.png "Capture Modal") <br />
+
+Captured Page
+![alt text](/images/captured.png "Captured Page") <br />
