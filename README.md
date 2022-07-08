@@ -1,6 +1,7 @@
 # Pokedex Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project allows the user to view all pokemon and stats. The user is also able to capture a selected pokemon through the Capture Pokemon modal.
+The user is, then, able to view and release their captured pokemon on the Captured Pokemon page.
 
 ## Live Site
 
