@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Live Site
+
+[https://brianlpham21.github.io/pokedex/](https://brianlpham21.github.io/pokedex/)
+
 ## How to run project locally
 
 In the project directory, you can run:
